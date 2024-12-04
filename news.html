@@ -12,27 +12,60 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 
 		<style type="text/css">
+	
 		</style>
+
 	</head>
 
 	<body class="is-preload">
 		<style >
-						/* 触发弹窗图片的样式 */
-	
-			#myImg1 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
-			#myImg1:hover {opacity: 0.7;}
-			#myImg2 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
-			#myImg2:hover {opacity: 0.7;}
-			#myImg3 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
-			#myImg3:hover {opacity: 0.7;}
-			#myImg4 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
-			#myImg4:hover {opacity: 0.7;}
-			#myImg5 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
-			#myImg5:hover {opacity: 0.7;}
-			#myImg6 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
-			#myImg6:hover {opacity: 0.7;}
-			#myImg7 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
-			#myImg7:hover {opacity: 0.7;}
+			/* 添加滚动效果的CSS样式 */
+			/* 滚动容器 */
+				.scroll-container {
+				display: flex;
+				overflow-x: scroll;  /* 保证横向滚动 */
+				width: 100%;  /* 宽度占满容器 */
+				overflow-x: hidden;  /* 默认隐藏滚动条 */
+				scroll-snap-type: x mandatory;
+				gap: 10px;  /* 图片项间距 */
+				margin-bottom: 10px;
+				}
+
+			/* 每个图片项 */
+				.scroll-item {
+				flex: 0 0 auto;  /* 不会伸展或收缩，宽度固定 */
+				width: 30%;  /* 每个图片项宽度占30%，保证一行显示3张图片 */
+				text-align: center;
+				}
+
+			/* 图片样式 */
+				.scroll-image {
+				width: 100%;  /* 图片宽度自适应容器 */
+				height: auto;  /* 高度自适应 */
+				display: block;
+				margin-bottom: 10px;  /* 图片居中 */
+				}
+
+			/* 文字样式 */
+				.scroll-text {
+				font-size: 16px;
+				text-align: center;
+				margin-top: 10px;
+				word-wrap: break-word;
+				word-break: break-word;
+				white-space: normal;
+				}
+
+			/* 媒体查询：屏幕宽度小于 600px 时调整布局 */
+				@media (max-width: 600px) {
+				.scroll-item {
+					width: 100%;  /* 屏幕小于600px时每个图片项占满一行 */
+				}
+				}
+			/* 触发弹窗图片的样式 */
+				#myImg1 {border-radius: 5px;cursor: pointer;transition: 0.3s;}
+				#myImg1:hover {opacity: 0.7;}
+			
 			/* 弹窗背景 */
 			.modal {
 				display: none; /* Hidden by default */
@@ -44,8 +77,8 @@
 				width: 100%; /* Full width */
 				height: 100%; /* Full height */
 				overflow: auto; /* Enable scroll if needed */
-				background-color: rgb(0,0,0); /* Fallback color */
-				background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+				background-color: rgb(0, 0, 0); /* Fallback color */
+				background-color: rgb(0, 0, 0); /* Black w/ opacity */
 			}
 			
 			/* 图片 */
@@ -53,7 +86,10 @@
 				margin:auto;
 				display: block;
 				width: 100%;
-				max-width:1200px;
+				max: width 1200px;
+				height: 100%; /* 高度100%自适应容器 */
+				object-fit: contain;
+			
 			}
 			
 			/* 文本内容 */
@@ -110,6 +146,51 @@
 					width: 100%;
 				}
 			}
+			 /* 前一张和后一张按钮的样式 */
+			.prev, .next {
+            position: absolute;
+            top: 50%;
+            padding: 15px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            background-color: rgb(255, 255, 255);
+			border: none;
+			border-radius: 50%; /* 圆形按钮 */
+			cursor: pointer;
+			z-index: 3;
+			transform: translateY(-50%);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+			transition: all 0.3s ease-in-out; /* 平滑过渡效果 */
+			/* 使用 Flexbox 来居中图标 */
+			display: flex; /* 设定为弹性盒布局 */
+			align-items: center; /* 垂直方向居中 */
+			justify-content: center; /* 水平方向居中 */
+			pointer-events: auto;
+            }
+			
+			/* 鼠标悬停时的按钮效果 */
+			.prev:hover, .next:hover {
+				transform: translateY(-50%) scale(1.1); /* 放大按钮 */
+				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* 增强阴影效果 */
+			}
+			
+			/* 鼠标按下时的效果 */
+			.prev:active, .next:active {
+				transform: translateY(-50%) scale(1.05); /* 按下时稍微缩小 */
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 恢复阴影 */
+			}
+
+			/* 左右按钮位置 */
+			.prev {
+				left: 10px;
+			}
+
+			.next {
+				right: 10px;
+			}
+
+			
 		</style>
 
 		<!-- Wrapper -->
@@ -124,147 +205,120 @@
 									<a href="index.html" class="logo"><strong>Hongfei Wang's Group</strong> </a>
 								</header>
 
-							
-								<section id="banner">
+								<section id="News">
 									<div class="content">
 										<header>
 											<h2>News</h2>
-										</header>
+										</header>	
+									</div>
+
+									<h3><span style="color: #3c55e0">2024</span></h3>
+									<br>
+									<div class="box alt">
+										<div class="scroll-container">
+											<!-- 每个滚动块 -->
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News2/20241028chiralzekun.jpg" alt="" class="scroll-image">
+												<h4 class="scroll-text">Congratulations to Zekun for Excellent Poster Awards!</h4>
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News2/bojunLi-Hong Xu Prize.png" alt="" class="scroll-image">
+												<h4 class="scroll-text">Congratulations to Bojun for The Li-Hong Xu Prize in ACS!</h4>
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News2/zhangliCCS.jpg" alt="" class="scroll-image">
+												<h4 class="scroll-text">Congratulations to Li for Excellent Poster Awards!</h4>
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News2/bojun.jpg" alt="" class="scroll-image">
+												<h4 class="scroll-text"><h4>Congratulations to Bojun for Excellent Oral Presentation Award!</h4>
+											</div>
+											<!-- 更多滚动项 -->
+										</div>
+									</div>
+									<h3><span style="color: #3c55e0">2023</span></h3>
+									<br>
+									<div class="box alt">
+										<div class="scroll-container">
+											<!-- 每个滚动块 -->
+											
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News2/zahngli_dalianNCCD.jpg" alt="" class="scroll-image">
+												<h4 class="scroll-text"><h4>Congratulations to Li for Best Poster Awards!</h4>
+											</div>
+											<!-- 更多滚动项 -->
+										</div>
+									</div>
+									<!-- 弹窗 -->
+									<div id="myModal" class="modal">
+										<span class="close">&times;</span>
+										<img class="modal-content" id="img01">
+										<div class="caption" id="caption"></div>
+										<button class="prev">&#10094;</button>
+										<button class="next">&#10095;</button>
 									</div>
 								</section>
-								<section>
-									<h3>2023</h3>
+								
+								<section id="activities">
+									<div class="content">
+										<header>
+											<h2>Academic activities</h2>
+										</header>
+									</div>
+									<h3><span style="color: #3c55e0">2023</span></h3>
 									<br>
 									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-							
-													<div class="col-4"><span class="image fit"><img id="myImg1" src="images/News/230914YuxiangWeng.jpg" alt="" /><h4>Quantum effects in the phptosynthenic process By Yuxiang Weng</h4></span></div>																												
-													<div class="col-4"><span class="image fit"><img id="myImg2" src="images/News/230904DongpingZhong.jpg" alt="" /><h4>Ultrafast Biological Dynamics for Protein Properties and Functions By Dongping Zhong</h4></span></div>
-													<div class="col-4"><span class="image fit"><img id="myImg3" src="images/News/230822Wen-binLin.jpg" alt="" /><h4>Metal-Organic Frameworks for Sustainability and HumanHealth By Wen-bin Lin</h4></span></div>							
-													<!-- Break -->
-													<div class="col-4"><span class="image fit"><img id="myImg4" src="images/News/230626FengGai.jpg" alt="" /><h4>Spectroscopic Study of Protein Structure and Dynamics By Prof.Feng Gai</h4></span></div>							
-													<div class="col-4"><span class="image fit"><img id="myImg5" src="images/News/230518HongmeiSu.jpg" alt="" /><h4>Enhancing the Photolabile Character of DNA/RNA Building Blocks: Ultrafast and Time-Resovled Spectroscopy Studies By Prof. Hongmei Su</h4></span></div>																												
-													<div class="col-4"><span class="image fit"><img id="myImg6" src="images/News/230331XuemingYang.jpg" alt="" /><h4>Quantum Nature of Chemical Reactivity By Xueming Yang</h4></span></div>
-													<!-- Break -->
-
-										<!-- 触发弹窗 - 图片改为你的图片地址<img id="myImg1" src="images/News/230331XuemingYang.jpg" alt="" width="400" height="300"> -->	
-										<!-- 弹窗 -->
-										<div id="myModal" class="modal">
-										
-										<!-- 关闭按钮 -->
-										<span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-										<!-- 弹窗内容 -->
-										<img class="modal-content" id="img01">
-										
-										<!-- 文本描述 -->
-										<div id="caption"></div>
-										
-										</div>
-								</section>
-								<section>
-									<h3>2022</h3>
+										<div class="scroll-container">
+											<!-- 每个滚动块 -->
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News/230914YuxiangWeng.jpg" alt="" class="scroll-image">
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News/230904DongpingZhong.jpg" alt="" class="scroll-image">
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News/230822Wen-binLin.jpg" alt="" class="scroll-image">
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News/230626FengGai.jpg" alt="" class="scroll-image">
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News/230518HongmeiSu.jpg" alt="" class="scroll-image">
+											</div>
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News/230331XuemingYang.jpg" alt="" class="scroll-image">
+											<!-- 更多滚动项 -->
+											</div>
+										</div>	
+									</div>
+									<h3><span style="color: #3c55e0">2022</span></h3>
 									<br>
 									<div class="box alt">
-										<div class="row gtr-50 gtr-uniform">
-							
-													<div class="col-4"><span class="image fit"><img id="myImg7" src="images/News/221103Dong-HuiQuan.jpg" alt="" /><h4>Modeling Studies of Interstellar Prebiotic Molecules By Prof.Dong-Hui Quan</h4></span></div>																												
-													<!-- Break -->
-													
-										<!-- 触发弹窗 - 图片改为你的图片地址<img id="myImg1" src="images/News/230331XuemingYang.jpg" alt="" width="400" height="300"> -->	
-										<!-- 弹窗 -->
-										<div id="myModal" class="modal">
-										
-										<!-- 关闭按钮 -->
-										<span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-										
-										<!-- 弹窗内容 -->
-										<img class="modal-content" id="img01">
-										
-										<!-- 文本描述 -->
-										<div id="caption"></div>
-										
+										<div class="scroll-container">
+											<!-- 每个滚动块 -->
+											
+											<div class="scroll-item">
+												<img id="myImg1" src="images/News/221103Dong-HuiQuan.jpg" alt="" class="scroll-image">
+											</div>
+											<!-- 更多滚动项 -->
 										</div>
+									</div>
+									<!-- 弹窗 -->
+									<div id="myModal" class="modal">
+										<span class="close">&times;</span>
+										<img class="modal-content" id="img01">
+										<div class="caption" id="caption"></div>
+										<button class="prev">&#10094;</button>
+										<button class="next">&#10095;</button>
+									</div>
+									
 								</section>
+								
 								
 								
 						</div>
 					</div>
-					<script>
-									// 获取弹窗
-							var modal = document.getElementById('myModal');
-							
-							// 获取图片插入到弹窗 - 使用 "alt" 属性作为文本部分的内容
-							var img = document.getElementById('myImg1');
-							var modalImg = document.getElementById("img01");
-							var captionText = document.getElementById("caption");
-							img.onclick = function(){
-								modal.style.display = "block";
-								modalImg.src = this.src;
-								captionText.innerHTML = this.alt;
-							}
-							
-							// 获取 <span> 元素，设置关闭按钮
-							var span = document.getElementsByClassName("close")[0];
-							
-							// 当点击 (x), 关闭弹窗
-							span.onclick = function() { 
-							modal.style.display = "none";
-							}
-					</script>
-					<script>						
-							var modal = document.getElementById('myModal');
-							var img = document.getElementById('myImg2');
-							var modalImg = document.getElementById("img01");
-							var captionText = document.getElementById("caption");
-							img.onclick = function(){modal.style.display = "block";modalImg.src = this.src;captionText.innerHTML = this.alt;}
-							var span = document.getElementsByClassName("close")[0];
-							span.onclick = function() { modal.style.display = "none";}
-					</script>
-					<script>						
-						var modal = document.getElementById('myModal');
-						var img = document.getElementById('myImg3');
-						var modalImg = document.getElementById("img01");
-						var captionText = document.getElementById("caption");
-						img.onclick = function(){modal.style.display = "block";modalImg.src = this.src;captionText.innerHTML = this.alt;}
-						var span = document.getElementsByClassName("close")[0];
-						span.onclick = function() { modal.style.display = "none";}
-					</script>
-					<script>						
-						var modal = document.getElementById('myModal');
-						var img = document.getElementById('myImg4');
-						var modalImg = document.getElementById("img01");
-						var captionText = document.getElementById("caption");
-						img.onclick = function(){modal.style.display = "block";modalImg.src = this.src;captionText.innerHTML = this.alt;}
-						var span = document.getElementsByClassName("close")[0];
-						span.onclick = function() { modal.style.display = "none";}
-					</script>
-					<script>						
-						var modal = document.getElementById('myModal');
-						var img = document.getElementById('myImg5');
-						var modalImg = document.getElementById("img01");
-						var captionText = document.getElementById("caption");
-						img.onclick = function(){modal.style.display = "block";modalImg.src = this.src;captionText.innerHTML = this.alt;}
-						var span = document.getElementsByClassName("close")[0];
-						span.onclick = function() { modal.style.display = "none";}
-					</script>
-					<script>						
-						var modal = document.getElementById('myModal');
-						var img = document.getElementById('myImg6');
-						var modalImg = document.getElementById("img01");
-						var captionText = document.getElementById("caption");
-						img.onclick = function(){modal.style.display = "block";modalImg.src = this.src;captionText.innerHTML = this.alt;}
-						var span = document.getElementsByClassName("close")[0];
-						span.onclick = function() { modal.style.display = "none";}
-					</script>
-					<script>						
-						var modal = document.getElementById('myModal');
-						var img = document.getElementById('myImg7');
-						var modalImg = document.getElementById("img01");
-						var captionText = document.getElementById("caption");
-						img.onclick = function(){modal.style.display = "block";modalImg.src = this.src;captionText.innerHTML = this.alt;}
-						var span = document.getElementsByClassName("close")[0];
-						span.onclick = function() { modal.style.display = "none";}
-					</script>
+					
 				<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
@@ -310,6 +364,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script src="assets/js/changeimage.js"></script> 
+			<script src="assets/js/scroll.js"></script>
+			<script src="assets/js/changeimage.js"></script>
 	</body>
 </html>
