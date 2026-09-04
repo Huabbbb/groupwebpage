@@ -17,8 +17,107 @@
 
 	</head>
 
-	<body class="is-preload">
+		<body class="is-preload">
 		<style >
+			/* News 顶部大图轮播 */
+			.news-carousel {
+				margin: 1.5em 0 3em 0;
+			}
+
+			.news-carousel-frame {
+				background: #f5f6f7;
+				border-radius: 0.375em;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.news-carousel-image {
+				cursor: pointer;
+				display: block;
+				height: clamp(320px, 58vw, 680px);
+				object-fit: contain;
+				width: 100%;
+			}
+
+			.news-carousel-caption {
+				background: rgba(20, 24, 28, 0.82);
+				bottom: 0;
+				color: #fff;
+				font-size: 1.05em;
+				left: 0;
+				margin: 0;
+				padding: 1em 4.5em;
+				position: absolute;
+				text-align: center;
+				width: 100%;
+			}
+
+			.news-carousel-control {
+				background: rgba(255, 255, 255, 0.9);
+				border: 0;
+				border-radius: 50%;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+				color: #3d4449 !important;
+				font-size: 1.5em;
+				height: 2.4em;
+				line-height: 2.4em;
+				padding: 0;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 2.4em;
+				z-index: 2;
+			}
+
+			.news-carousel-control:hover {
+				background: #fff;
+			}
+
+			.news-carousel-previous {
+				left: 1em;
+			}
+
+			.news-carousel-next {
+				right: 1em;
+			}
+
+			.news-carousel-dots {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.55em;
+				justify-content: center;
+				padding-top: 1em;
+			}
+
+			.news-carousel-dot {
+				background: #b8bec3;
+				border: 0;
+				border-radius: 50%;
+				box-shadow: none;
+				height: 0.75em;
+				padding: 0;
+				width: 0.75em;
+			}
+
+			.news-carousel-dot[aria-current="true"] {
+				background: #f56a6a;
+			}
+
+			@media (max-width: 600px) {
+				.news-carousel-image {
+					height: 430px;
+				}
+
+				.news-carousel-caption {
+					font-size: 0.9em;
+					padding: 0.8em 3.5em;
+				}
+
+				.news-carousel-control {
+					font-size: 1em;
+				}
+			}
+
 			/* 添加滚动效果的CSS样式 */
 			/* 滚动容器 */
 				.scroll-container {
@@ -210,6 +309,15 @@
 										<header>
 											<h2>News</h2>
 										</header>	
+									</div>
+									<div class="news-carousel" aria-label="News highlights">
+										<div class="news-carousel-frame">
+											<img class="news-carousel-image" src="" alt="">
+											<p class="news-carousel-caption"></p>
+											<button class="news-carousel-control news-carousel-previous" type="button" aria-label="Previous news">&#10094;</button>
+											<button class="news-carousel-control news-carousel-next" type="button" aria-label="Next news">&#10095;</button>
+										</div>
+										<div class="news-carousel-dots" aria-label="Choose news"></div>
 									</div>
 									<h3><span style="color: #3c55e0">2026</span></h3>
 									<br>
