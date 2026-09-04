@@ -1,0 +1,77 @@
+/* Compact, expandable member cards used only on the Group Members page. */
+.member-list.posts {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1em;
+	margin: 0 0 2em 0;
+	width: 100%;
+}
+
+.member-list.posts article {
+	border: solid 1px rgba(210, 215, 217, 0.75);
+	border-radius: 0.375em;
+	margin: 0;
+	width: auto;
+}
+
+.member-list.posts article:before,
+.member-list.posts article:after {
+	display: none;
+}
+
+.member-toggle {
+	background: transparent;
+	box-shadow: none;
+	color: #3d4449 !important;
+	display: block;
+	height: auto;
+	letter-spacing: 0;
+	line-height: 1.4;
+	padding: 1em 2.75em 1em 1em;
+	position: relative;
+	text-align: left;
+	text-transform: none;
+	white-space: normal;
+	width: 100%;
+}
+
+.member-toggle:hover,
+.member-toggle:focus {
+	background: rgba(245, 106, 106, 0.06);
+	box-shadow: none;
+}
+
+.member-toggle:after {
+	content: '\002B';
+	font-size: 1.4em;
+	font-weight: normal;
+	position: absolute;
+	right: 1em;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.member-toggle[aria-expanded="true"]:after {
+	content: '\2212';
+}
+
+.member-details {
+	border-top: solid 1px rgba(210, 215, 217, 0.75);
+	padding: 1.25em;
+}
+
+.member-list.posts article .member-details .image {
+	margin-bottom: 1.5em;
+}
+
+@media screen and (max-width: 1280px) {
+	.member-list.posts {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 736px) {
+	.member-list.posts {
+		grid-template-columns: 1fr;
+	}
+}
